@@ -1,37 +1,68 @@
 /*--------------------------------------------------
 Function Contact Formular
----------------------------------------------------*/	
-		
-	function ContactForm() {	
-	
-		if( $('#contact-formular').length > 0 ){
-			
-			$('#contactform').submit(function(){
-				var action = $(this).attr('action');
-				$("#message").slideUp(750,function() {
-					$('#message').hide();
-					$('#submit').attr('disabled','disabled');		
-					$.post(action, {
-						name: $('#name').val(),
-						email: $('#email').val(),
-						comments: $('#comments').val(),
-						verify: $('#verify').val()
-					},
-					function(data){
-						document.getElementById('message').innerHTML = data;
-						$('#message').slideDown('slow');
-						$('#contactform img.loader').fadeOut('slow',function(){$(this).remove()});
-						$('#submit').removeAttr('disabled');
-						if(data.match('success') != null) $('#contactform').slideUp('slow');		
-					}
-				);		
-				});		
-				return false;		
-			});		
+---------------------------------------------------*/
+
+function ContactForm() {
+	console.log("me chl giya");
+  
+	if ($('#contact-formular').length > 0) {
+  
+	  $('#contactform').submit(function (e) {
+		e.preventDefault(); // prevent form submission
+  
+		// check if all fields are filled
+		if ($('#name').val() == '' || $('#email').val() == '' || $('#comments').val() == '' || $('#verify').val() == '') {
+		  alert("Please fill in all the fields.");
+		  return false;
 		}
+  
+		// check if captcha is correct
+		var captchaSum = 1 + 3;
+		if ($('#verify').val() != captchaSum) {
+		  alert("Captcha validation failed. Please try again.");
+		  return false;
+		}
+  
+		// enable submit button and submit form
+		$('#submit').removeAttr('disabled');
+		$('#contactform')[0].submit();
+	  });
+	}
+  }
+  
+
+		
+	// function ContactForm() {	
+	// 	console.log("me chl giya")
+	
+	// 	if( $('#contact-formular').length > 0 ){
+			
+	// 		$('#contactform').submit(function(){
+	// 			var action = $(this).attr('action');
+	// 			$("#message").slideUp(750,function() {
+	// 				$('#message').hide();
+	// 				$('#submit').attr('disabled','disabled');		
+	// 				$.post(action, {
+	// 					name: $('#name').val(),
+	// 					email: $('#email').val(),
+	// 					comments: $('#comments').val(),
+	// 					verify: $('#verify').val()
+	// 				},
+	// 				function(data){
+	// 					document.getElementById('message').innerHTML = data;
+	// 					$('#message').slideDown('slow');
+	// 					$('#contactform img.loader').fadeOut('slow',function(){$(this).remove()});
+	// 					$('#submit').removeAttr('disabled');
+	// 					if(data.match('success') != null) $('#contactform').slideUp('slow');		
+	// 				}
+	// 			);		
+	// 			});		
+	// 			return false;		
+	// 		});		
+	// 	}
 		
 
-	}//End ContactForm	
+	// }//End ContactForm	
 
 
 /*--------------------------------------------------
@@ -248,11 +279,11 @@ Function Contact Map
 			var infowindow = new google.maps.InfoWindow({
 				content: contentString
 			});	
-			var companyImage = new google.maps.MarkerImage('images/marker.png',
-				new google.maps.Size(58,63),<!-- Width and height of the marker -->
-				new google.maps.Point(0,0),
-				new google.maps.Point(35,20)<!-- Position of the marker -->
-			);
+			// var companyImage = new google.maps.MarkerImage('images/marker.png',
+			// 	new google.maps.Size(58,63),<!-- Width and height of the marker -->
+			// 	new google.maps.Point(0,0),
+			// 	new google.maps.Point(35,20)<!-- Position of the marker -->
+			// );
 			var companyPos = new google.maps.LatLng(43.270441,6.640888);	
 			var companyMarker = new google.maps.Marker({
 				position: companyPos,
