@@ -23,12 +23,30 @@ function ContactForm() {
 		  return false;
 		}
   
-		// enable submit button and submit form
-		$('#submit').removeAttr('disabled');
-		$('#contactform')[0].submit();
+		// send form data to server-side script using AJAX
+		$.ajax({
+		  url: 'send_email.php',
+		  type: 'POST',
+		  data: {
+			name: $('#name').val(),
+			email: $('#email').val(),
+			comments: $('#comments').val()
+		  },
+		  success: function(response) {
+			// handle success response
+			alert("Form data sent successfully.");
+			$('#contactform')[0].reset();
+		  },
+		  error: function(xhr, status, error) {
+			// handle error response
+			alert("Form data could not be sent.");
+			console.log(xhr.responseText);
+		  }
+		});
 	  });
 	}
   }
+  
   
 
 		
