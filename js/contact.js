@@ -3,7 +3,7 @@ Function Contact Formular
 ---------------------------------------------------*/
 
 function ContactForm() {
-	console.log("me chl giya");
+	
   
 	if ($('#contact-formular').length > 0) {
   
