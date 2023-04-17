@@ -42,7 +42,10 @@
 		background-position:center center;
 		background-size: cover;
 	}
-	
+	.section-image img {
+		filter: brightness(0.8);
+	}
+
 	.swiper-slide .outer {
 		margin: 0 auto;
 		box-sizing: border-box;		
